@@ -21,3 +21,10 @@ directory ::File.join(::Dir.home(node['current_user']), ".duply") do
   group node['current_user']
   mode "0750"
 end
+
+execute "copy duply profiles down from webdav" do
+  action :run
+  command "cp -R #{node['webdav']['mount']}/duplicity/duply/* ~/.duply"
+  creates ::File.join(::Dir.home(node['current_user']), ".duply", "webdav", "conf")
+  user node['current_user']
+end
