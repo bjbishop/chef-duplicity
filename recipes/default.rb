@@ -25,6 +25,8 @@ execute "copy duply profiles down from webdav" do
   creates ::File.join(::Dir.home(node['current_user']), ".duply", "webdav", "conf")
   creates ::File.join(::Dir.home(node['current_user']), ".duply", "webdav", "exclude")
   user node['current_user']
+  retries 10
+  retry_delay 10
 end
 
 file "box.com public cert file: cacert.pem" do
