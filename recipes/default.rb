@@ -38,6 +38,15 @@ file "box.com public cert file: cacert.pem" do
   mode "0640"
 end
 
+file "webdav secrets" do
+  action :create
+  path ::File.join(::Dir.home(node['current_user']), ".profile.d", "box50-secrets.sh")
+  content lazy { ::File.read(::File.join(::Dir.home(node['current_user'])), ".box") }
+  owner node['current_user']
+  mode "0700"
+  only_if { ::File.exists?(::File.join(::Dir.home(node['current_user'])), ".box") }
+end
+
 Chef::Log.info "#{cookbook_name}: Use lunchy to install services:\n
   - #{::File.join(::Dir.home(node['current_user']), ".duplicity", "duply_local_scheduler.plist")}
   - #{::File.join(::Dir.home(node['current_user']), ".duplicity", "duply_webdav_scheduler.plist")}
