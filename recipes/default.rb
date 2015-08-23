@@ -58,24 +58,24 @@ export FTP_PASSWORD=#{passwd}
 end
 
 
-directory ::File.join(::Dir.home(node['current_user']), ".secrets") do
-  owner node['current_user']
-end
+# directory ::File.join(::Dir.home(node['current_user']), ".secrets") do
+#   owner node['current_user']
+# end
 
-execute "move .box secrets file" do
-  action :run
-  command "mv #{::File.join(::Dir.home(node['current_user']), ".box")} #{::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")}"
-  creates ::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")
-  user node['current_user']
-  only_if { ::File.exists?(::File.join(::Dir.home(node['current_user']), ".box")) }
-  notifies :create, "link[webdav .box file]", :delayed
-end
+# execute "move .box secrets file" do
+#   action :run
+#   command "mv #{::File.join(::Dir.home(node['current_user']), ".box")} #{::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")}"
+#   creates ::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")
+#   user node['current_user']
+#   only_if { ::File.exists?(::File.join(::Dir.home(node['current_user']), ".box")) }
+#   notifies :create, "link[webdav .box file]", :delayed
+# end
 
-link "webdav .box file" do
-  action :nothing
-  target_file ::File.join(::Dir.home(node['current_user']), ".box")
-  to ::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")
-end
+# link "webdav .box file" do
+#   action :nothing
+#   target_file ::File.join(::Dir.home(node['current_user']), ".box")
+#   to ::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")
+# end
 
 Chef::Log.info "#{cookbook_name}: Use lunchy to install services:\n
   - #{::File.join(::Dir.home(node['current_user']), ".duplicity", "duply_local_scheduler.plist")}
