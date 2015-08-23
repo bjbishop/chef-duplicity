@@ -42,10 +42,16 @@ directory ::File.join(::Dir.home(node['current_user']), ".profile.d") do
   owner node['current_user']
 end
 
+passwd = ::File.readlines(::File.join(::Dir.home(node['current_user']), '.box'))[1]
+
 file "webdav secrets" do
   action :create
   path ::File.join(::Dir.home(node['current_user']), ".profile.d", "box50-secrets.sh")
-  content "export PASSPHRASE=#{::File.readlines(::File.join(::Dir.home(node['current_user']), '.box'))[1]}"
+  content "# password for duplicity and duply for use with box.com over webdav
+# written by chef #{cookbook_name}::#{recipe_name}
+export PASSPHRASE=#{passwd}
+export FTP_PASSWORD=#{passwd}
+"
   owner node['current_user']
   mode "0700"
   only_if { ::File.exists?(::File.join(::Dir.home(node['current_user']), ".box")) }
