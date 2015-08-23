@@ -41,7 +41,7 @@ end
 file "webdav secrets" do
   action :create
   path ::File.join(::Dir.home(node['current_user']), ".profile.d", "box50-secrets.sh")
-  content "export PASSPHRASE=#{::File.read(::File.join(::Dir.home(node['current_user']), '.box'))[1]]}"
+  content "export PASSPHRASE=#{::File.read(::File.join(::Dir.home(node['current_user']), '.box'))[1]}"
   owner node['current_user']
   mode "0700"
   only_if { ::File.exists?(::File.join(::Dir.home(node['current_user']), ".box")) }
