@@ -37,3 +37,8 @@ file "box.com public cert file: cacert.pem" do
   group node['current_user']
   mode "0640"
 end
+
+Chef::Log.info "#{cookbook_name}: Use lunchy to install services:\n
+  - #{::File.join(::Dir.home(node['current_user']), ".duplicity", "duply_local_scheduler.plist")}
+  - #{::File.join(::Dir.home(node['current_user']), ".duplicity", "duply_webdav_scheduler.plist")}
+"
