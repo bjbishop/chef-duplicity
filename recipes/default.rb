@@ -38,6 +38,10 @@ file "box.com public cert file: cacert.pem" do
   mode "0640"
 end
 
+directory ::File.join(::Dir.home(node['current_user']), ".profile.d") do
+  owner node['current_user']
+end
+
 file "webdav secrets" do
   action :create
   path ::File.join(::Dir.home(node['current_user']), ".profile.d", "box50-secrets.sh")
@@ -45,6 +49,11 @@ file "webdav secrets" do
   owner node['current_user']
   mode "0700"
   only_if { ::File.exists?(::File.join(::Dir.home(node['current_user']), ".box")) }
+end
+
+
+directory ::File.join(::Dir.home(node['current_user']), ".secrets") do
+  owner node['current_user']
 end
 
 execute "move .box secrets file" do
