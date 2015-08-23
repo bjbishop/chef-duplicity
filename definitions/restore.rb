@@ -20,8 +20,8 @@ define :duplicity_restore, :verbosity => 3,
   params[:duplicity_options].each { |opt| duplicity_cmd << " #{opt}" }
   duplicity_cmd << " --verbosity #{params[:verbosity]}"
   duplicity_cmd << " --file-to-restore #{params[:restore_item]}"
-  duplicity_cmd << " #{remote_path}"
-  duplicity_cmd << " #{local_path}"
+  duplicity_cmd << " #{params[:remote_path]}"
+  duplicity_cmd << " #{params[:local_path]}"
   duplicity_cmd << " --time #{params[:age]}"
   
   execute "Restore #{params[:restore_item]} to #{params[:local_path]}" do
