@@ -15,7 +15,7 @@ define :duplicity_restore, :verbosity => 3,
   duplicity_cmd = "FTP_PASSWORD=#{params[:remote_path_password]}" if
     params[:remote_path_password]
   duplicity_cmd = " PASSPHRASE=#{params[:encryption_password]}" if
-    params[:encryption_password]]
+    params[:encryption_password]
   duplicity_cmd = " duplicity"
   params[:duplicity_options].each { |opt| duplicity_cmd << " #{opt}" }
   duplicity_cmd << " --verbosity #{params[:verbosity]}"
