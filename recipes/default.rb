@@ -58,7 +58,7 @@ end
 
 execute "move .box secrets file" do
   action :run
-  command "mv #{::File.join(::Dir.home(node['current_user']), ".box"))} #{::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt"))}"
+  command "mv #{::File.join(::Dir.home(node['current_user']), ".box")} #{::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")}"
   creates ::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")
   user node['current_user']
   only_if { ::File.exists?(::File.join(::Dir.home(node['current_user']), ".box")) }
@@ -67,7 +67,7 @@ end
 
 link "webdav .box file" do
   action :nothing
-  target_file ::File.join(::Dir.home(node['current_user']), ".box"))
+  target_file ::File.join(::Dir.home(node['current_user']), ".box")
   to ::File.join(::Dir.home(node['current_user']), ".secrets", "box50-secrets.txt")
 end
 
