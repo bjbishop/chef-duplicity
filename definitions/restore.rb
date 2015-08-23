@@ -29,7 +29,6 @@ define :duplicity_restore, :verbosity => 3,
     command duplicity_cmd
     cwd ::Dir.home(params[:restore_as_user])
     user params[:restore_as_user]
-    only_if ::Dir.exist?(params[:local_path])
     only_if `which duplicity`
   end
 end
