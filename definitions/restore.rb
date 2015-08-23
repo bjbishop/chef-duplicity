@@ -23,12 +23,13 @@ define :duplicity_restore, :verbosity => 3,
   duplicity_cmd << " #{params[:remote_path]}"
   duplicity_cmd << " #{params[:local_path]}"
   duplicity_cmd << " --time #{params[:age]}"
+
+  package "duplicity"
   
   execute "Restore #{params[:restore_item]} to #{params[:local_path]}" do
     action :run
     command duplicity_cmd
     cwd ::Dir.home(params[:restore_as_user])
     user params[:restore_as_user]
-    only_if `which duplicity`
   end
 end
