@@ -21,7 +21,7 @@ end
 
 execute "copy duply profiles down from webdav" do
   action :run
-  command "cp -R #{node['webdav']['mount']}/duplicity/duply/* ~/.duply"
+  command "cp -R #{node['webdav']['mount']}/duply/* ~/.duply"
   creates ::File.join(::Dir.home(node['current_user']), ".duply", "webdav", "conf")
   creates ::File.join(::Dir.home(node['current_user']), ".duply", "webdav", "exclude")
   user node['current_user']
