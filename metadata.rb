@@ -1,6 +1,6 @@
 name             'chef-duplicity'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
+maintainer       'Bryan Bishop'
+maintainer_email 'bryanjbishop@yahoo.com'
 license          'All rights reserved'
 description      'Installs/Configures chef-duplicity'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
