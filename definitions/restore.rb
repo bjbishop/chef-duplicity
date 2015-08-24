@@ -43,5 +43,6 @@ define :duplicity_restore,
     cwd ::Dir.home(params[:restore_as_user])
     user params[:restore_as_user]
     sensitive true
+    not_if { ::Dir.exist?(params[:local_path]) }
   end
 end
