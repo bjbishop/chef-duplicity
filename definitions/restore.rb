@@ -4,6 +4,7 @@ define :duplicity_restore, :verbosity => 3,
        :local_path => "restore",
        :age => "now",
        :restore_as_user => "",
+       :restore_as_group => params[:restore_as_user],
        :duplicity_options => [],
        :remote_path_password => nil,
        :encryption_password => nil do
@@ -14,6 +15,8 @@ define :duplicity_restore, :verbosity => 3,
   
   directory params[:local_path] do
     recursive true
+    owner params[:restore_as_user]
+    group params[:restore_as_group]
   end
 
   duplicity_cmd = "FTP_PASSWORD=#{params[:remote_path_password]}" if
