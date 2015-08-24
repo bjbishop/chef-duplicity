@@ -8,6 +8,10 @@ define :duplicity_restore, :verbosity => 3,
        :remote_path_password => nil,
        :encryption_password => nil do
 
+  include_recipe "homebrewalt"
+
+  package "duplicity"
+  
   directory params[:local_path] do
     recursive true
   end

@@ -1,6 +1,9 @@
 include_recipe "catchall::webdav"
 include_recipe "shells::bash_settings"
 
+package "duplicity"
+package "duply"
+
 file "raise the ulimit for duplicity" do
   action :create
   path ::File.join(::Dir.home(node['current_user']), ".profile.d", "ulimit.sh")
