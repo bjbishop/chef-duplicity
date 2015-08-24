@@ -1,4 +1,4 @@
-passwd = ::File.readlines(::File.join(::Dir.home(node['current_user']), '.box'))[1]
+passwd = ::File.readlines(::File.join(::Dir.home(node['current_user']), '.box'))[1].chomp
 
 Chef::Log.info "#{cookbook_name}: password is #{passwd}"
 
