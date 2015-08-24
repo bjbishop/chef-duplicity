@@ -84,3 +84,5 @@ Chef::Log.info "#{cookbook_name}: Use lunchy to install services:\n
   - #{::File.join(::Dir.home(node['current_user']), ".duplicity", "duply_local_scheduler.plist")}
   - #{::File.join(::Dir.home(node['current_user']), ".duplicity", "duply_webdav_scheduler.plist")}
 "
+
+include_recipe "duplicity::restore"
