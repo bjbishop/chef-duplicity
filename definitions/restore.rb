@@ -1,4 +1,5 @@
-define :duplicity_restore, :verbosity => 3,
+define :duplicity_restore,
+       :verbosity => 3,
        :restore_item => nil,
        :remote_path => nil,
        :local_path => "restore",
