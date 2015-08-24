@@ -10,9 +10,12 @@ duplicity_restore ".apikeys" do
   age "now"
   restore_as_user node['current_user']
   restore_as_group node['current_user']
+  # If restoring files from a backup using a different UID,
+  # use the option: --ignore-errors
   duplicity_options [
     "--tempdir /tmp",
     "--no-print-statistics",
-    "--extra-clean"
+    "--numeric-owner",
+    "--num-retries 2",
   ]
 end
