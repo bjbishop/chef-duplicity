@@ -6,6 +6,7 @@ duplicity_restore ".apikeys" do
   remote_path "par2+webdavs://kc0.rjx@gmail.com@dav.box.com/dav/duplicity/"
   age "now"
   restore_as_user node['current_user']
+  restore_as_group node['current_user']
   duplicity_options [
     "--tempdir /tmp",
     "--no-print-statistics",
