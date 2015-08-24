@@ -9,8 +9,9 @@ define :duplicity_restore,
        :duplicity_options => [],
        :remote_path_password => nil,
        :encryption_password => nil,
-       :pre_cmd => nil do
-
+       :pre_cmd => nil,
+       :post_cmd => nil do
+  
   package "duplicity"
   
   directory params[:local_path] do
@@ -33,11 +34,14 @@ define :duplicity_restore,
   duplicity_cmd << " #{params[:remote_path]}"
   duplicity_cmd << " #{params[:local_path]}"
   duplicity_cmd << " --time #{params[:age]}"
+  duplicity_cmd << " && " + params[:post_cmd] if
+    params[:post_cmd]
 
   execute "Restore #{params[:restore_item]} to #{params[:local_path]}" do
     action :run
     command duplicity_cmd
     cwd ::Dir.home(params[:restore_as_user])
     user params[:restore_as_user]
+    sensitive true
   end
 end
