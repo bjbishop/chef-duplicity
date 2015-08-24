@@ -1,10 +1,9 @@
 passwd = ::File.readlines(::File.join(::Dir.home(node['current_user']), '.box'))[1].chomp
 
-duplicity_restore ".apikeys" do
-  verbosity 4
+duplicity_restore "Restore folder .apikeys into ~/restore" do
   restore_item ".apikeys"
   local_path File.join(::Dir.home(node["current_user"]), "restore")
-  remote_path "par2+webdavs://kc0.rjx@gmail.com@dav.box.com/dav/duplicity/"
+  remote_path node["duplicity"]["webdav_remote"]
   restore_as_user node['current_user']
   restore_as_group node['current_user']
   remote_path_password passwd

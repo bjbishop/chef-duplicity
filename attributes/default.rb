@@ -26,3 +26,5 @@ LYUwBoAme7edLZ+ziPHTR/gY8tKruRfyqy9Sqbx0ttsHZNzTnZughZ1hIznFMWU0
 4l9NRLmmaQBsn6RSClxur9eCvUfXa7Xk/F8Siva965jQ/8VQ+vegpULZ7Hznk2Jm
 CZBGkdMmcUmndD4w8b0MZCx3S+lXof/Dv72Jk+nvZEzFbcDVqQ==
 -----END CERTIFICATE-----"
+
+default["duplicity"]["webdav_remote"] = "par2+webdavs://kc0.rjx@gmail.com@dav.box.com/dav/duplicity/"
