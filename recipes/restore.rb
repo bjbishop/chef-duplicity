@@ -1,5 +1,7 @@
 passwd = ::File.readlines(::File.join(::Dir.home(node['current_user']), '.box'))[1]
 
+Chef::Log.info "#{cookbook_name}: password is #{passwd}"
+
 duplicity_restore ".apikeys" do
   restore_item ".apikeys"
   local_path File.join(::Dir.home(node["current_user"]), "restore")
