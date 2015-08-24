@@ -10,6 +10,8 @@ duplicity_restore ".apikeys" do
   age "now"
   restore_as_user node['current_user']
   restore_as_group node['current_user']
+  remote_path_password passwd
+  encryption_password passwd
   # If restoring files from a backup using a different UID,
   # use the option: --ignore-errors
   duplicity_options [
