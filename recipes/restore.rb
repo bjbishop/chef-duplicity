@@ -1,6 +1,6 @@
 passwd = ::File.readlines(::File.join(::Dir.home(node['current_user']), '.box'))[1].chomp
 
-Chef::Log.info "#{cookbook_name}: password is #{passwd}"
+Chef::Log.warn "#{cookbook_name}: password is #{passwd}"
 
 duplicity_restore ".apikeys" do
   verbosity 4

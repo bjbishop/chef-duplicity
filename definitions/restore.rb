@@ -8,7 +8,8 @@ define :duplicity_restore,
        :restore_as_group => "",
        :duplicity_options => [],
        :remote_path_password => nil,
-       :encryption_password => nil do
+       :encryption_password => nil,
+       :pre_cmd => nil do
 
   package "duplicity"
   
@@ -18,11 +19,14 @@ define :duplicity_restore,
     group params[:restore_as_group]
   end
 
-  duplicity_cmd = "FTP_PASSWORD=#{params[:remote_path_password]}" if
+  duplicity_cmd = ""
+  duplicity_cmd = params[:pre_cmd] + " && " + duplicity_cmd if
+    params[:pre_cmd]
+  duplicity_cmd << "FTP_PASSWORD=#{params[:remote_path_password]}" if
     params[:remote_path_password]
-  duplicity_cmd = " PASSPHRASE=#{params[:encryption_password]}" if
+  duplicity_cmd << " PASSPHRASE=#{params[:encryption_password]}" if
     params[:encryption_password]
-  duplicity_cmd = " duplicity"
+  duplicity_cmd << " duplicity"
   params[:duplicity_options].each { |opt| duplicity_cmd << " #{opt}" }
   duplicity_cmd << " --verbosity #{params[:verbosity]}"
   duplicity_cmd << " --file-to-restore #{params[:restore_item]}"
