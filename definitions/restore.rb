@@ -14,11 +14,11 @@ define :duplicity_restore,
   
   package "duplicity"
   
-  directory params[:local_path] do
-    recursive true
-    owner params[:restore_as_user]
-    group params[:restore_as_group]
-  end
+  #directory params[:local_path] do
+  #  recursive true
+  #  owner params[:restore_as_user]
+  #  group params[:restore_as_group]
+  #end
 
   duplicity_cmd = ""
   duplicity_cmd = params[:pre_cmd] + " && " + duplicity_cmd if
